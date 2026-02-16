@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
+  { to: '/transparency', label: 'Transparency' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -22,7 +23,7 @@ export const NavBar = () => {
 
   return (
     <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-      <nav className="w-full max-w-4xl bg-paper/40 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-6 h-16 flex items-center justify-between relative z-50 transition-all duration-300">
+      <nav className="w-full max-w-4xl bg-[#0F172A]/60 backdrop-blur-xl border border-gold/20 rounded-full shadow-[0_8px_32px_rgba(245,158,11,0.1)] px-6 h-16 flex items-center justify-between relative z-50 transition-all duration-300 hover:border-gold/30 hover:shadow-[0_8px_32px_rgba(245,158,11,0.2)]">
         <Link to="/" className="flex items-center gap-2 group focus:outline-none">
           <img
             src="/logo.png"
@@ -39,7 +40,9 @@ export const NavBar = () => {
                 to={to}
                 end={to === '/'}
                 className={({ isActive }) =>
-                  `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative ${isActive ? 'text-ink bg-white/10' : 'text-ink/60 hover:text-ink hover:bg-white/5'
+                  `px-4 py-2 rounded-full text-sm font-display tracking-wide transition-all duration-300 relative ${isActive
+                    ? 'text-gold bg-gold/10 font-medium shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                    : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
@@ -54,7 +57,7 @@ export const NavBar = () => {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-white/5 border border-amber-500/20 text-ink text-sm font-medium hover:bg-amber-500/10 hover:border-amber-500/40 transition-all duration-300"
+            className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-gold text-[#0F172A] text-sm font-bold tracking-wide hover:bg-amber-400 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all duration-300 transform hover:scale-105"
           >
             Book Now
           </a>
@@ -62,7 +65,7 @@ export const NavBar = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden p-2 text-ink/80 hover:text-ink focus:outline-none"
+          className="md:hidden p-2 text-white/80 hover:text-gold transition-colors focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -78,7 +81,7 @@ export const NavBar = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-24 left-4 right-4 bg-paper/90 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-glass p-6 md:hidden flex flex-col gap-4 z-40"
+            className="absolute top-24 left-4 right-4 bg-[#0F172A]/90 backdrop-blur-2xl border border-gold/20 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-6 md:hidden flex flex-col gap-4 z-40"
           >
             {NAV_LINKS.map(({ to, label }) => (
               <NavLink
@@ -86,7 +89,7 @@ export const NavBar = () => {
                 to={to}
                 end={to === '/'}
                 className={({ isActive }) =>
-                  `text-lg font-medium p-3 rounded-xl transition-colors ${isActive ? 'text-ink bg-white/5' : 'text-ink/60 hover:text-ink hover:bg-white/5'
+                  `text-lg font-display p-3 rounded-xl transition-colors ${isActive ? 'text-gold bg-gold/10' : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
@@ -97,7 +100,7 @@ export const NavBar = () => {
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 w-full flex items-center justify-center px-5 py-3 rounded-xl bg-ink text-paper font-medium"
+              className="mt-2 w-full flex items-center justify-center px-5 py-3 rounded-xl bg-gold text-[#0F172A] font-bold tracking-wide"
             >
               Book a Session
             </a>

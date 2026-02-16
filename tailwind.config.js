@@ -11,11 +11,16 @@ export default {
         ink: 'rgb(var(--color-ink) / <alpha-value>)',
         subtle: 'rgb(var(--color-subtle) / <alpha-value>)',
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        gold: '#F59E0B', // Standard Gold
+        amber: {
+          500: '#F59E0B',
+          400: '#FBBF24',
+        },
       },
       fontFamily: {
-        display: ['Outfit', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
-        sans: ['Inter', 'sans-serif'],
+        display: ['var(--font-display)', 'serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       backgroundImage: {
         'noise': "url('/noise.png')",

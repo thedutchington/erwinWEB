@@ -3,7 +3,7 @@ export const BOOKING_URL = 'https://calendar.app.google/Ydo96cr9naLj9qqU8'
 export const PROFILE = {
   name: 'Caden Erwin',
   contact: {
-    email: 'cerwin42451@beaumontusd.k12.ca.us / cerwinbhs@icloud.com',
+    email: 'cerwinbhs@icloud.com',
     social: '@thedutcher_bhs (Instagram)',
   },
   tagline: 'Student. Leader. Tutor. Architect of the Future.',
@@ -32,6 +32,30 @@ export const AWARDS = [
   'Over 10 miscellaneous awards',
   "Principal's Award Winner (6th Grade)",
   'NJHS Member (8th Grade)',
+]
+
+export const SUCCESS_FRAMEWORK = [
+  {
+    id: 'diagnose',
+    title: 'Diagnostic Assessment',
+    description: 'Pinpointing academic core competencies and individual growth areas to establish a precise baseline for excellence.',
+    iconKey: 'Target',
+    color: '#F59E0B' // Gold
+  },
+  {
+    id: 'optimize',
+    title: 'Strategic Optimization',
+    description: 'Engineering tailored study methodologies and performance systems unique to the student\'s learning profile.',
+    iconKey: 'ShieldCheck',
+    color: '#6366F1' // Indigo
+  },
+  {
+    id: 'mastery',
+    title: 'Iterative Mastery',
+    description: 'Applying specialized systems to neutralize weaknesses and transform them into high-performance, verifiable strengths.',
+    iconKey: 'RefreshCw',
+    color: '#10B981' // Emerald
+  }
 ]
 
 export const BENTO_ITEMS = [
@@ -105,4 +129,113 @@ export const FAQ_DATA = [
     question: 'How do I book a session?',
     answer: 'schedule_link',
   },
+]
+
+export const ACADEMIC_RECORDS = [
+  {
+    grade: "10th Grade",
+    id: "10th",
+    terms: [
+      {
+        id: "10-s1",
+        label: "Semester 1",
+        gpa: "4.0",
+        courses: [
+          { name: "Integrated Math 3", grade: "A", status: "Verified" },
+          { name: "Chemistry", grade: "A", status: "Verified" },
+          { name: "ELA 10", grade: "A", status: "Verified" },
+          { name: "World History", grade: "A", status: "Verified" },
+          { name: "ASB Leadership", grade: "A", status: "Verified" },
+        ]
+      }
+    ]
+  },
+  {
+    grade: "9th Grade",
+    id: "9th",
+    terms: [
+      {
+        id: "9-s2",
+        label: "Semester 2",
+        gpa: "4.0+",
+        courses: [
+          { name: "Law Enforcement", grade: "A+", status: "Verified" },
+          { name: "English 9", grade: "A+", status: "Verified" },
+          { name: "Pre-AP Biology", grade: "A+", status: "Verified" },
+          { name: "Int. Math 2", grade: "A-", status: "Verified" },
+          { name: "PE 9", grade: "A+", status: "Verified" },
+          { name: "ASB Leadership", grade: "A", status: "Verified" },
+        ]
+      },
+      {
+        id: "9-s1",
+        label: "Semester 1",
+        gpa: "4.0",
+        courses: [
+          { name: "Law Enforcement", grade: "A", status: "Verified" },
+          { name: "English 9", grade: "A", status: "Verified" },
+          { name: "Pre-AP Biology", grade: "A", status: "Verified" },
+          { name: "Int. Math 2", grade: "A", status: "Verified" },
+          { name: "PE 9", grade: "A", status: "Verified" },
+          { name: "ASB Leadership", grade: "A", status: "Verified" },
+        ]
+      }
+    ]
+  },
+  {
+    grade: "8th Grade",
+    id: "8th",
+    terms: [
+      {
+        id: "8-s2",
+        label: "Semester 2",
+        gpa: "Exceeds",
+        courses: [
+          { name: "ELA 8", grade: "E", status: "Verified" },
+          { name: "ASB Leadership", grade: "E", status: "Verified" },
+          { name: "Integrated Math", grade: "M", status: "Verified" },
+          { name: "Science 8", grade: "M", status: "Verified" },
+          { name: "Social Studies 8", grade: "M", status: "Verified" },
+          { name: "PE 8", grade: "M", status: "Verified" },
+        ]
+      }
+    ]
+  },
+  {
+    grade: "7th Grade",
+    id: "7th",
+    terms: [
+      {
+        id: "7-s2",
+        label: "Semester 2",
+        gpa: "Exceeds",
+        courses: [
+          { name: "Social Studies 7", grade: "E", status: "Verified" },
+          { name: "ASB Leadership", grade: "E", status: "Verified" },
+          { name: "Math 7", grade: "M", status: "Verified" },
+          { name: "Science 7", grade: "M", status: "Verified" },
+          { name: "ELA 7", grade: "M", status: "Verified" },
+          { name: "PE 7", grade: "M", status: "Verified" },
+        ]
+      }
+    ]
+  },
+  {
+    grade: "6th Grade",
+    id: "6th",
+    terms: [
+      {
+        id: "6-s2",
+        label: "Semester 2",
+        gpa: "Outstanding",
+        courses: [
+          { name: "Math 6", grade: "E", status: "Verified" },
+          { name: "Science 6", grade: "E", status: "Verified" },
+          { name: "ELA 6", grade: "E", status: "Verified" },
+          { name: "Social Studies 6", grade: "E", status: "Verified" },
+          { name: "Leadership", grade: "E", status: "Verified" },
+        ]
+      }
+    ]
+  }
 ]

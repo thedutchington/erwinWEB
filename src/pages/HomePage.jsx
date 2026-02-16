@@ -20,7 +20,6 @@ export default function HomePage() {
       </section>
       <Timeline />
       <Services />
-      <Testimonials />
       <FAQ />
     </>
   )

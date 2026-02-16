@@ -17,6 +17,7 @@ import {
   Rocket,    // Added
 } from 'lucide-react'
 import { ErrorBoundary } from 'react-error-boundary'
+import { SuccessFramework } from './SuccessFramework'
 
 import {
   BOOKING_URL,
@@ -56,7 +57,7 @@ export function Hero() {
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-white/50 animate-aurora-text mb-6">
             Architect of<br />the Future
           </h1>
-          <p className="font-body text-xl md:text-2xl text-ink/60 max-w-xl mb-10 leading-relaxed italic border-l-2 border-accent/20 pl-6">
+          <p className="font-body text-xl md:text-2xl text-ink/60 max-w-xl mb-10 leading-relaxed italic border-l-2 border-gold/40 pl-6">
             Expert Peer Tutoring for High School Success. Empowering scholars through leadership, mentorship, and academic excellence.
           </p>
 
@@ -79,10 +80,10 @@ export function Hero() {
         </div>
 
         <div className="relative group flex justify-center lg:justify-end">
-          <div className="absolute -inset-4 bg-accent/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 hover:border-accent/40 lg:rotate-2 hover:rotate-0">
+          <div className="absolute -inset-4 bg-gold/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] lg:rotate-2 hover:rotate-0">
             <img
-              src="/caden-headshot.jpg"
+              src="/caden-headshot.png"
               alt="Caden Erwin"
               className="w-full h-full object-cover object-top grayscale-[20%] sepia-[10%] contrast-[1.1] hover:grayscale-0 transition-all duration-700 ease-out"
             />
@@ -157,20 +158,9 @@ const BentoGridInner = React.memo(function BentoGrid() {
 
   return (
     <section ref={ref} id="about" className="px-6 py-32 max-w-7xl mx-auto">
-      <motion.div
-        className="mb-16 md:flex justify-between items-end border-b border-white/10 pb-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-      >
-        <div>
-          <h2 className="font-display text-4xl md:text-5xl text-ink mb-2 tracking-tighter uppercase">The Success Framework</h2>
-          <p className="text-ink/50 text-lg">The pillars of my academic philosophy and student-first strategy.</p>
-        </div>
-        <div className="hidden md:block text-right">
-          <div className="text-[10px] font-mono text-ink/40 tracking-[0.4em]">CAD-ERN // PERSISTENCE</div>
-        </div>
-      </motion.div>
+      <SuccessFramework />
 
+      {/* Re-focusing Bento as 'The Impact' or supplemental proof */}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(280px,auto)]"
         variants={container}
@@ -241,7 +231,7 @@ const BentoGridInner = React.memo(function BentoGrid() {
         </motion.div>
 
       </motion.div>
-    </section>
+    </section >
   )
 })
 
@@ -361,87 +351,7 @@ export const Services = React.memo(function Services() {
 })
 
 export const Testimonials = React.memo(function Testimonials() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  return (
-    <motion.section
-      ref={ref}
-      id="network"
-      className="px-6 py-24 max-w-6xl mx-auto border-t border-white/5"
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="mb-16">
-        <h2 className="font-display text-xs uppercase tracking-[0.3em] text-accent mb-4">
-          Academic & Leadership Endorsements
-        </h2>
-        <p className="text-white/40 text-sm max-w-xl font-body">
-          Faculty and administration members who have mentored my leadership journey across SGMS and BHS.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Administration */}
-        <div className="space-y-6 lg:col-span-3">
-          <h3 className="font-display text-[10px] uppercase tracking-widest text-accent/60 flex items-center gap-2">
-            <div className="w-8 h-[1px] bg-accent/20" /> Administration
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {ACADEMIC_NETWORK.principals.map((p, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -2 }}
-                className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all"
-              >
-                <div className="text-white/90 font-medium text-sm">{p.name}</div>
-                <div className="text-[10px] text-white/30 font-mono uppercase mt-1">{p.school}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* BHS Faculty */}
-        <div className="space-y-6 lg:col-span-2">
-          <h3 className="font-display text-[10px] uppercase tracking-widest text-accent/60 flex items-center gap-2">
-            <div className="w-8 h-[1px] bg-accent/20" /> BHS Faculty
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {ACADEMIC_NETWORK.teachers.bhs.map((t, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -2 }}
-                className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all"
-              >
-                <div className="text-white/90 font-medium text-sm">{t.name}</div>
-                <div className="text-[10px] text-white/30 font-mono uppercase mt-1">{t.role}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* SGMS Faculty */}
-        <div className="space-y-6 lg:col-span-1">
-          <h3 className="font-display text-[10px] uppercase tracking-widest text-accent/60 flex items-center gap-2">
-            <div className="w-8 h-[1px] bg-accent/20" /> SGMS Faculty
-          </h3>
-          <div className="grid grid-cols-1 gap-4">
-            {ACADEMIC_NETWORK.teachers.sgms.map((t, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -2 }}
-                className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all"
-              >
-                <div className="text-white/90 font-medium text-sm">{t.name}</div>
-                <div className="text-[10px] text-white/30 font-mono uppercase mt-1">{t.role}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.section>
-  )
+  return null;
 })
 
 export const FAQ = React.memo(function FAQ() {
@@ -520,7 +430,7 @@ export const Footer = React.memo(function Footer() {
       '@type': 'Person',
       name: PROFILE.name,
       description: PROFILE.tagline,
-      email: PROFILE.contact.email.split(' ')[0].trim(),
+      email: PROFILE.contact.email,
       jobTitle: 'Peer Tutor & Student Leader',
       alumniOf: [
         { '@type': 'School', name: 'Beaumont Senior High School' },
@@ -559,16 +469,22 @@ export const Footer = React.memo(function Footer() {
             <h4 className="font-display text-white text-sm uppercase tracking-widest mb-6">Connect</h4>
             <ul className="space-y-4 text-sm">
               <li><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Schedule Session</a></li>
-              <li><a href={`mailto:${PROFILE.contact.email.split('/')[0].trim()}`} className="hover:text-white transition-colors">Email Me</a></li>
+              <li><a href={`mailto:${PROFILE.contact.email}`} className="hover:text-white transition-colors">Email Me</a></li>
               <li><a href="https://instagram.com/thedutcher_bhs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
             </ul>
           </div>
 
           <div>
+            <h4 className="font-display text-white text-sm uppercase tracking-widest mb-6">Transparency</h4>
+            <ul className="space-y-4 text-sm">
+              <li><Link to="/transparency" className="text-white/30 hover:text-white transition-colors">Academic Records</Link></li>
+              <li><Link to="/verification-process" className="text-white/30 hover:text-white transition-colors">Verification Process</Link></li>
+            </ul>
+          </div>
+          <div>
             <h4 className="font-display text-white text-sm uppercase tracking-widest mb-6">Legal</h4>
             <ul className="space-y-4 text-sm">
-              <li><Link to="/terms" className="text-white/30 hover:text-white transition-colors">Terms of Service</Link></li>
-              <li><a href="#" className="text-white/30 hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><Link to="/terms" className="text-white/30 hover:text-white transition-colors">TOS + Privacy Policy</Link></li>
             </ul>
           </div>
         </div>

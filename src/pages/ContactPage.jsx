@@ -20,7 +20,7 @@ export default function ContactPage() {
       title: "How would you like to connect?",
       options: [
         { id: 'booking', label: 'Book a Session', icon: Calendar, sub: 'Pick a time on my calendar', link: BOOKING_URL },
-        { id: 'email', label: 'Send an Email', icon: Mail, sub: PROFILE.contact.email.split(' ')[0], link: `mailto:${PROFILE.contact.email.split(' ')[0]}` }
+        { id: 'email', label: 'Send an Email', icon: Mail, sub: PROFILE.contact.email, link: `mailto:${PROFILE.contact.email}` }
       ]
     }
   }

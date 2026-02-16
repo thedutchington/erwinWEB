@@ -7,6 +7,8 @@ import ServicesPage from './pages/ServicesPage'
 import TestimonialsPage from './pages/TestimonialsPage'
 import ContactPage from './pages/ContactPage'
 import TermsPage from './pages/TermsPage'
+import TransparencyPage from './pages/TransparencyPage'
+import VerificationPage from './pages/VerificationPage'
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
         <Route path="testimonials" element={<TestimonialsPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="terms" element={<TermsPage />} />
+        <Route path="transparency" element={<TransparencyPage />} />
+        <Route path="verification-process" element={<VerificationPage />} />
       </Route>
     </Routes>
   )
