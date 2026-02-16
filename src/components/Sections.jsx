@@ -47,33 +47,48 @@ export function Hero() {
       transition={{ duration: 0.8 }}
     >
       <motion.div
-        className="relative z-10 max-w-5xl mx-auto"
+        className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-left"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
-        <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-semibold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-white/50 animate-aurora-text mb-6">
-          Architect of<br />the Future
-        </h1>
-        <p className="font-body text-xl md:text-2xl text-ink/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Empowering the next generation of scholars through leadership, mentorship, and academic excellence.
-        </p>
+        <div>
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-white/50 animate-aurora-text mb-6">
+            Architect of<br />the Future
+          </h1>
+          <p className="font-body text-xl md:text-2xl text-ink/60 max-w-xl mb-10 leading-relaxed italic border-l-2 border-accent/20 pl-6">
+            Expert Peer Tutoring for High School Success. Empowering scholars through leadership, mentorship, and academic excellence.
+          </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]"
-          >
-            Start Your Journey
-          </a>
-          <a
-            href="#about"
-            className="px-8 py-4 rounded-full border border-white/10 text-white/70 hover:text-white hover:bg-white/5 transition-all"
-          >
-            Learn More
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] text-center"
+            >
+              Start Your Journey
+            </a>
+            <a
+              href="#about"
+              className="px-8 py-4 rounded-full border border-white/10 text-white/70 hover:text-white hover:bg-white/5 transition-all text-center"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+
+        <div className="relative group flex justify-center lg:justify-end">
+          <div className="absolute -inset-4 bg-accent/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 hover:border-accent/40 lg:rotate-2 hover:rotate-0">
+            <img
+              src="/caden-headshot.jpg"
+              alt="Caden Erwin"
+              className="w-full h-full object-cover object-top grayscale-[20%] sepia-[10%] contrast-[1.1] hover:grayscale-0 transition-all duration-700 ease-out"
+            />
+            {/* Swiss/Clinical coordinate overlay on image */}
+            <div className="absolute top-4 left-4 text-[10px] font-mono text-white/20 tracking-widest">CAD-ERN.EXE</div>
+          </div>
         </div>
       </motion.div>
     </motion.section>
@@ -86,6 +101,40 @@ function Fallback({ error }) {
       <p>Something went wrong:</p>
       <pre className="text-sm mt-2">{error.message}</pre>
     </div>
+  )
+}
+
+const ComputeReveal = ({ value, duration = 2.5 }) => {
+  const [displayValue, setDisplayValue] = useState(0)
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+
+  useEffect(() => {
+    if (inView) {
+      let startTimestamp = null
+      const endValue = parseFloat(value)
+      if (isNaN(endValue)) return
+
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp
+        const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1)
+        const current = progress * endValue
+
+        if (progress < 1) {
+          setDisplayValue(current.toFixed(1))
+          window.requestAnimationFrame(step)
+        } else {
+          setDisplayValue(value)
+        }
+      }
+      window.requestAnimationFrame(step)
+    }
+  }, [inView, value, duration])
+
+  return (
+    <span ref={ref} className="text-transparent bg-clip-text bg-gradient-to-t from-orange-400 via-white to-white">
+      {displayValue}{value.toString().includes('+') && !displayValue.toString().includes('+') ? '+' : ''}
+    </span>
   )
 }
 
@@ -114,11 +163,11 @@ const BentoGridInner = React.memo(function BentoGrid() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
       >
         <div>
-          <h2 className="font-display text-4xl md:text-5xl text-ink mb-2">Leadership Moat</h2>
-          <p className="text-ink/50 text-lg">The pillars of my academic philosophy.</p>
+          <h2 className="font-display text-4xl md:text-5xl text-ink mb-2 tracking-tighter uppercase">The Success Framework</h2>
+          <p className="text-ink/50 text-lg">The pillars of my academic philosophy and student-first strategy.</p>
         </div>
         <div className="hidden md:block text-right">
-          <div className="text-sm font-mono text-ink/40">EST. 2026</div>
+          <div className="text-[10px] font-mono text-ink/40 tracking-[0.4em]">CAD-ERN // PERSISTENCE</div>
         </div>
       </motion.div>
 
@@ -131,38 +180,38 @@ const BentoGridInner = React.memo(function BentoGrid() {
         {/* Large Card - Introduction */}
         <motion.div
           variants={item}
-          className="md:col-span-2 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-white/20 transition-colors relative overflow-hidden"
+          className="md:col-span-2 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           <Lightbulb className="w-10 h-10 text-white/80 mb-6" />
-          <h3 className="font-display text-3xl text-white mb-4">Innovation in Education</h3>
+          <h3 className="font-display text-3xl text-white mb-4 tracking-tight">Innovation in Education</h3>
           <p className="text-white/60 text-lg leading-relaxed max-w-xl">
-            Reimagining how students learn by combining traditional academic rigor with modern mentorship strategies. We don't just teach subjects; we build confidence.
+            A methodology built on academic precision and peer-led leadership. I bridge the gap between classroom theory and real-world mastery, providing students with the strategic framework and confidence needed to excel.
           </p>
         </motion.div>
 
         {/* Tall Card - Stats */}
         <motion.div
           variants={item}
-          className="md:row-span-2 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-between group hover:border-white/20 transition-colors relative overflow-hidden"
+          className="md:row-span-2 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-between group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-purple-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           <div>
             <Award className="w-10 h-10 text-white/80 mb-6" />
-            <h3 className="font-display text-3xl text-white mb-2">Impact</h3>
+            <h3 className="font-display text-3xl text-white mb-2 tracking-tight">Impact</h3>
           </div>
-          <ul className="space-y-6">
-            <li className="block">
-              <div className="text-4xl font-display text-white mb-1">500+</div>
-              <div className="text-white/50 text-sm uppercase tracking-wider">Hours Tutored</div>
+          <ul className="space-y-10">
+            <li className="flex flex-col">
+              <div className="text-5xl font-display text-white mb-1 shadow-[0_0_20px_rgba(255,255,255,0.1)] tracking-tighter w-fit">
+                <ComputeReveal value="4.0" />
+              </div>
+              <div className="text-white/50 text-[10px] uppercase tracking-[0.3em] font-mono">GPA Maintained</div>
             </li>
-            <li className="block">
-              <div className="text-4xl font-display text-white mb-1">4.0</div>
-              <div className="text-white/50 text-sm uppercase tracking-wider">GPA Maintained</div>
-            </li>
-            <li className="block">
-              <div className="text-4xl font-display text-white mb-1">3+</div>
-              <div className="text-white/50 text-sm uppercase tracking-wider">Years Experience</div>
+            <li className="flex flex-col">
+              <div className="text-5xl font-display text-white mb-1 shadow-[0_0_20px_rgba(255,255,255,0.1)] tracking-tighter w-fit">
+                <ComputeReveal value="3+" />
+              </div>
+              <div className="text-white/50 text-[10px] uppercase tracking-[0.3em] font-mono">Years Experience</div>
             </li>
           </ul>
         </motion.div>
@@ -170,10 +219,10 @@ const BentoGridInner = React.memo(function BentoGrid() {
         {/* Medium Card - Philosophy */}
         <motion.div
           variants={item}
-          className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-white/20 transition-colors"
+          className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
         >
           <Users className="w-10 h-10 text-white/80 mb-6" />
-          <h3 className="font-display text-2xl text-white mb-3">Community First</h3>
+          <h3 className="font-display text-2xl text-white mb-3 tracking-tight">Community First</h3>
           <p className="text-white/60 leading-relaxed">
             Building a network of peers who support and challenge each other.
           </p>
@@ -182,10 +231,10 @@ const BentoGridInner = React.memo(function BentoGrid() {
         {/* Medium Card - Skills */}
         <motion.div
           variants={item}
-          className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-white/20 transition-colors"
+          className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
         >
           <Rocket className="w-10 h-10 text-white/80 mb-6" />
-          <h3 className="font-display text-2xl text-white mb-3">Future Ready</h3>
+          <h3 className="font-display text-2xl text-white mb-3 tracking-tight">Future Ready</h3>
           <p className="text-white/60 leading-relaxed">
             Preparing for the challenges of tomorrow with adaptive learning.
           </p>
@@ -333,42 +382,60 @@ export const Testimonials = React.memo(function Testimonials() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
-        {/* Principals */}
-        <div className="space-y-6">
-          <h3 className="font-display text-[10px] uppercase tracking-widest text-white/30 border-b border-white/5 pb-2">Administration</h3>
-          <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Administration */}
+        <div className="space-y-6 lg:col-span-3">
+          <h3 className="font-display text-[10px] uppercase tracking-widest text-accent/60 flex items-center gap-2">
+            <div className="w-8 h-[1px] bg-accent/20" /> Administration
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {ACADEMIC_NETWORK.principals.map((p, i) => (
-              <div key={i}>
+              <motion.div
+                key={i}
+                whileHover={{ y: -2 }}
+                className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all"
+              >
                 <div className="text-white/90 font-medium text-sm">{p.name}</div>
-                <div className="text-[10px] text-white/30 font-mono uppercase mt-0.5">{p.school}</div>
-              </div>
+                <div className="text-[10px] text-white/30 font-mono uppercase mt-1">{p.school}</div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* SGMS Teachers */}
-        <div className="space-y-6">
-          <h3 className="font-display text-[10px] uppercase tracking-widest text-white/30 border-b border-white/5 pb-2">SGMS Faculty</h3>
-          <div className="space-y-4">
-            {ACADEMIC_NETWORK.teachers.sgms.map((t, i) => (
-              <div key={i}>
-                <div className="text-white/90 font-medium text-sm">{t.name}</div>
-                <div className="text-[10px] text-white/30 font-mono uppercase mt-0.5">{t.role}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* BHS Teachers */}
-        <div className="space-y-6">
-          <h3 className="font-display text-[10px] uppercase tracking-widest text-white/30 border-b border-white/5 pb-2">BHS Faculty</h3>
-          <div className="space-y-4">
+        {/* BHS Faculty */}
+        <div className="space-y-6 lg:col-span-2">
+          <h3 className="font-display text-[10px] uppercase tracking-widest text-accent/60 flex items-center gap-2">
+            <div className="w-8 h-[1px] bg-accent/20" /> BHS Faculty
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {ACADEMIC_NETWORK.teachers.bhs.map((t, i) => (
-              <div key={i}>
+              <motion.div
+                key={i}
+                whileHover={{ y: -2 }}
+                className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all"
+              >
                 <div className="text-white/90 font-medium text-sm">{t.name}</div>
-                <div className="text-[10px] text-white/30 font-mono uppercase mt-0.5">{t.role}</div>
-              </div>
+                <div className="text-[10px] text-white/30 font-mono uppercase mt-1">{t.role}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* SGMS Faculty */}
+        <div className="space-y-6 lg:col-span-1">
+          <h3 className="font-display text-[10px] uppercase tracking-widest text-accent/60 flex items-center gap-2">
+            <div className="w-8 h-[1px] bg-accent/20" /> SGMS Faculty
+          </h3>
+          <div className="grid grid-cols-1 gap-4">
+            {ACADEMIC_NETWORK.teachers.sgms.map((t, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -2 }}
+                className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all"
+              >
+                <div className="text-white/90 font-medium text-sm">{t.name}</div>
+                <div className="text-[10px] text-white/30 font-mono uppercase mt-1">{t.role}</div>
+              </motion.div>
             ))}
           </div>
         </div>

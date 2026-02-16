@@ -22,7 +22,7 @@ export const NavBar = () => {
 
   return (
     <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-      <nav className="w-full max-w-4xl bg-paper/10 backdrop-blur-xl border border-white/10 rounded-full shadow-glass px-6 h-16 flex items-center justify-between relative z-50">
+      <nav className="w-full max-w-4xl bg-paper/40 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.5)] px-6 h-16 flex items-center justify-between relative z-50 transition-all duration-300">
         <Link to="/" className="flex items-center gap-2 group focus:outline-none">
           <img
             src="/logo.png"
@@ -54,7 +54,7 @@ export const NavBar = () => {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-white/10 border border-white/10 text-ink text-sm font-medium hover:bg-white/20 transition-colors"
+            className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-white/5 border border-amber-500/20 text-ink text-sm font-medium hover:bg-amber-500/10 hover:border-amber-500/40 transition-all duration-300"
           >
             Book Now
           </a>
