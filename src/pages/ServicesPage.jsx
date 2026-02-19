@@ -21,21 +21,12 @@ export default function ServicesPage() {
       <div className="max-w-6xl mx-auto px-6">
 
         <header className="mb-20 text-center lg:text-left">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-display text-5xl md:text-7xl text-white mb-6"
-          >
+          <h1 className="font-display text-5xl md:text-7xl text-white mb-6">
             Capabilities
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-white/60 text-xl max-w-2xl"
-          >
+          </h1>
+          <p className="text-white/60 text-xl max-w-2xl">
             A high-performance approach to academic growth and student leadership.
-          </motion.p>
+          </p>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-12 items-start">
@@ -51,8 +42,8 @@ export default function ServicesPage() {
                   key={service.id}
                   onClick={() => setActiveId(service.id)}
                   className={`group relative text-left p-6 rounded-2xl border transition-all duration-300 ${isActive
-                    ? 'bg-white/10 border-white/20 shadow-glass'
-                    : 'bg-transparent border-white/5 hover:border-white/10'
+                    ? 'bg-white/10 border-white/20 shadow-glass bg-black/10'
+                    : 'bg-transparent border-white/5 hover:border-white/10 bg-black/10'
                     }`}
                 >
                   <div className="flex items-center gap-4 relative z-10">
@@ -87,7 +78,7 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="rounded-3xl bg-white/5 border border-white/10 p-8 md:p-12 backdrop-blur-xl relative overflow-hidden"
+                className="rounded-3xl bg-white/5 bg-black/10 border border-white/10 p-8 md:p-12 backdrop-blur-xl relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-12 opacity-[0.02] pointer-events-none">
                   {React.createElement(ICON_MAP[activeService.iconKey] || BookOpen, {

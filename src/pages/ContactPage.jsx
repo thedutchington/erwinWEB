@@ -39,20 +39,12 @@ export default function ContactPage() {
       <div className="max-w-4xl w-full px-6 relative z-10">
 
         <header className="mb-12 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-display text-5xl md:text-6xl text-white mb-4"
-          >
+          <h1 className="font-display text-5xl md:text-6xl text-white mb-4">
             The Portal
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-white/50 text-lg"
-          >
+          </h1>
+          <p className="text-white/50 text-lg">
             Select an option below to get started.
-          </motion.p>
+          </p>
         </header>
 
         <div className="relative min-h-[450px]">
@@ -83,7 +75,7 @@ export default function ContactPage() {
                   <button
                     key={option.id}
                     onClick={() => handleOptionClick(option)}
-                    className="group flex items-center gap-6 p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-accent/30 hover:bg-white/10 transition-all text-left relative overflow-hidden"
+                    className="group flex items-center gap-6 p-6 rounded-2xl bg-white/5 bg-black/10 border border-white/5 hover:border-accent/30 hover:bg-white/10 transition-all text-left relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 

@@ -9,6 +9,8 @@ import ContactPage from './pages/ContactPage'
 import TermsPage from './pages/TermsPage'
 import TransparencyPage from './pages/TransparencyPage'
 import VerificationPage from './pages/VerificationPage'
+import BlogPage from './pages/BlogPage'
+import BlogPostPage from './pages/BlogPostPage'
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="terms" element={<TermsPage />} />
         <Route path="transparency" element={<TransparencyPage />} />
         <Route path="verification-process" element={<VerificationPage />} />
+        <Route path="blog" element={<BlogPage />} />
+        <Route path="blog/:slug" element={<BlogPostPage />} />
       </Route>
     </Routes>
   )

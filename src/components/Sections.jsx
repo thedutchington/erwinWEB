@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import {
   GraduationCap,
   Award,
   BookOpen,
   Users,
-  MessageCircle,
   ChevronDown,
   Mail,
   Instagram,
   Calendar,
-  Sparkles,
   School,
-  Lightbulb, // Added
-  Rocket,    // Added
+  Lightbulb,
+  Rocket,
 } from 'lucide-react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { SuccessFramework } from './SuccessFramework'
+import { Magnetic } from './ui/Magnetic'
+import { Scene3D } from './ui/Scene3D'
 
 import {
   BOOKING_URL,
@@ -32,70 +32,74 @@ import {
 
 const ICON_MAP = { Users, GraduationCap, Award, BookOpen, School, Lightbulb, Rocket }
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-48px' },
-  transition: { duration: 0.5 },
-}
+// Deprecated internal animations - transition handled by global PageTransition
+const fadeInUp = {}
 
+// ─────────────────────────────────────
+// HERO — stripped of gradient text, glow halos, CAD-ERN.EXE overlay
+// ─────────────────────────────────────
 export function Hero() {
+  const { scrollY } = useScroll()
+  const y1 = useTransform(scrollY, [0, 500], [0, 100])
+  const y2 = useTransform(scrollY, [0, 500], [0, -50])
+
   return (
-    <motion.section
-      className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 py-20 overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+    <section
+      className="relative min-h-screen flex flex-col justify-center px-6 py-24 overflow-hidden"
     >
-      <motion.div
-        className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-left"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.8 }}
-      >
+      <Scene3D />
+      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
         <div>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-white/50 animate-aurora-text mb-6">
-            Architect of<br />the Future
+          <p className="font-mono text-xs text-white/30 uppercase tracking-[0.3em] mb-6">Beaumont, CA</p>
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-white tracking-tight mb-6 leading-[0.95]">
+            Caden<br />Erwin
           </h1>
-          <p className="font-body text-xl md:text-2xl text-ink/60 max-w-xl mb-10 leading-relaxed italic border-l-2 border-gold/40 pl-6">
-            Expert Peer Tutoring for High School Success. Empowering scholars through leadership, mentorship, and academic excellence.
+          <p className="font-body text-lg md:text-xl text-white/50 max-w-lg mb-10 leading-relaxed">
+            I tutor math and chemistry for high schoolers in Beaumont. I also do ASB, and I write about what I learn along the way.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] text-center"
-            >
-              Start Your Journey
-            </a>
-            <a
-              href="#about"
-              className="px-8 py-4 rounded-full border border-white/10 text-white/70 hover:text-white hover:bg-white/5 transition-all text-center"
-            >
-              Learn More
-            </a>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Magnetic strength={0.25}>
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-gold text-[#0A0A0A] font-bold text-sm rounded-md hover:bg-amber-400 transition-colors duration-200 text-center inline-block"
+              >
+                Book a session
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.2}>
+              <Link
+                to="/about"
+                className="px-6 py-3 border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-colors duration-200 text-sm text-center rounded-md inline-block"
+              >
+                About me
+              </Link>
+            </Magnetic>
           </div>
         </div>
 
-        <div className="relative group flex justify-center lg:justify-end">
-          <div className="absolute -inset-4 bg-gold/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] lg:rotate-2 hover:rotate-0">
+        <motion.div
+          className="flex justify-center lg:justify-end"
+          style={{ y: y2 }}
+        >
+          <div className="w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-lg overflow-hidden border border-white/10 grayscale-[15%] contrast-[1.05]">
             <img
               src="/caden-headshot.png"
               alt="Caden Erwin"
-              className="w-full h-full object-cover object-top grayscale-[20%] sepia-[10%] contrast-[1.1] hover:grayscale-0 transition-all duration-700 ease-out"
+              className="w-full h-full object-cover object-top"
             />
-            {/* Swiss/Clinical coordinate overlay on image */}
-            <div className="absolute top-4 left-4 text-[10px] font-mono text-white/20 tracking-widest">CAD-ERN.EXE</div>
           </div>
-        </div>
-      </motion.div>
-    </motion.section>
+        </motion.div>
+      </div>
+    </section>
   )
 }
 
+// ─────────────────────────────────────
+// BENTO GRID — stripped of glassmorphism, glow shadows, gradient overlays
+// ─────────────────────────────────────
 function Fallback({ error }) {
   return (
     <div role="alert" className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-200">
@@ -105,7 +109,7 @@ function Fallback({ error }) {
   )
 }
 
-const ComputeReveal = ({ value, duration = 2.5 }) => {
+const ComputeReveal = ({ value, duration = 2 }) => {
   const [displayValue, setDisplayValue] = useState(0)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
@@ -133,7 +137,7 @@ const ComputeReveal = ({ value, duration = 2.5 }) => {
   }, [inView, value, duration])
 
   return (
-    <span ref={ref} className="text-transparent bg-clip-text bg-gradient-to-t from-orange-400 via-white to-white">
+    <span ref={ref} className="text-white">
       {displayValue}{value.toString().includes('+') && !displayValue.toString().includes('+') ? '+' : ''}
     </span>
   )
@@ -143,95 +147,68 @@ const BentoGridInner = React.memo(function BentoGrid() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  }
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  }
-
   return (
-    <section ref={ref} id="about" className="px-6 py-32 max-w-7xl mx-auto">
+    <section ref={ref} id="about" className="px-6 py-24 max-w-5xl mx-auto">
       <SuccessFramework />
 
-      {/* Re-focusing Bento as 'The Impact' or supplemental proof */}
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(280px,auto)]"
-        variants={container}
-        initial="hidden"
-        animate={inView ? "show" : "hidden"}
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[minmax(240px,auto)] mt-16"
       >
-        {/* Large Card - Introduction */}
-        <motion.div
-          variants={item}
-          className="md:col-span-2 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
+        {/* Intro card */}
+        <div
+          className="md:col-span-2 border border-white/[0.06] rounded-lg p-8 flex flex-col justify-end bg-black/10"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-          <Lightbulb className="w-10 h-10 text-white/80 mb-6" />
-          <h3 className="font-display text-3xl text-white mb-4 tracking-tight">Innovation in Education</h3>
-          <p className="text-white/60 text-lg leading-relaxed max-w-xl">
-            A methodology built on academic precision and peer-led leadership. I bridge the gap between classroom theory and real-world mastery, providing students with the strategic framework and confidence needed to excel.
+          <Lightbulb className="w-8 h-8 text-white/40 mb-5" />
+          <h3 className="font-display text-2xl text-white mb-3">What I actually do</h3>
+          <p className="text-white/45 leading-relaxed max-w-lg">
+            I help students who are stuck in math or chemistry. Not with motivational speeches — with the specific concepts they're missing. I've been where they are, and I remember what was confusing.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Tall Card - Stats */}
-        <motion.div
-          variants={item}
-          className="md:row-span-2 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-between group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
+        {/* Stats card */}
+        <div
+          className="md:row-span-2 border border-white/[0.06] rounded-lg p-8 flex flex-col justify-between bg-black/10"
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-purple-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           <div>
-            <Award className="w-10 h-10 text-white/80 mb-6" />
-            <h3 className="font-display text-3xl text-white mb-2 tracking-tight">Impact</h3>
+            <Award className="w-8 h-8 text-white/40 mb-5" />
+            <h3 className="font-display text-2xl text-white mb-2">By the numbers</h3>
           </div>
-          <ul className="space-y-10">
+          <ul className="space-y-8">
             <li className="flex flex-col">
-              <div className="text-5xl font-display text-white mb-1 shadow-[0_0_20px_rgba(255,255,255,0.1)] tracking-tighter w-fit">
+              <div className="text-4xl font-display text-white mb-1 tracking-tight">
                 <ComputeReveal value="4.0" />
               </div>
-              <div className="text-white/50 text-[10px] uppercase tracking-[0.3em] font-mono">GPA Maintained</div>
+              <div className="text-white/30 text-xs uppercase tracking-[0.2em] font-mono">GPA</div>
             </li>
             <li className="flex flex-col">
-              <div className="text-5xl font-display text-white mb-1 shadow-[0_0_20px_rgba(255,255,255,0.1)] tracking-tighter w-fit">
+              <div className="text-4xl font-display text-white mb-1 tracking-tight">
                 <ComputeReveal value="3+" />
               </div>
-              <div className="text-white/50 text-[10px] uppercase tracking-[0.3em] font-mono">Years Experience</div>
+              <div className="text-white/30 text-xs uppercase tracking-[0.2em] font-mono">Years tutoring</div>
             </li>
           </ul>
-        </motion.div>
+        </div>
 
-        {/* Medium Card - Philosophy */}
-        <motion.div
-          variants={item}
-          className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
-        >
-          <Users className="w-10 h-10 text-white/80 mb-6" />
-          <h3 className="font-display text-2xl text-white mb-3 tracking-tight">Community First</h3>
-          <p className="text-white/60 leading-relaxed">
-            Building a network of peers who support and challenge each other.
+        {/* Community card */}
+        <div className="border border-white/[0.06] rounded-lg p-8 flex flex-col justify-end bg-black/10">
+          <Users className="w-8 h-8 text-white/40 mb-5" />
+          <h3 className="font-display text-xl text-white mb-2">People, not metrics</h3>
+          <p className="text-white/40 leading-relaxed text-sm">
+            The students I work with become peers I learn from too.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Medium Card - Skills */}
-        <motion.div
-          variants={item}
-          className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 flex flex-col justify-end group hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 relative overflow-hidden cursor-pointer"
-        >
-          <Rocket className="w-10 h-10 text-white/80 mb-6" />
-          <h3 className="font-display text-2xl text-white mb-3 tracking-tight">Future Ready</h3>
-          <p className="text-white/60 leading-relaxed">
-            Preparing for the challenges of tomorrow with adaptive learning.
+        {/* Skills card */}
+        <div className="border border-white/[0.06] rounded-lg p-8 flex flex-col justify-end bg-black/10">
+          <Rocket className="w-8 h-8 text-white/40 mb-5" />
+          <h3 className="font-display text-xl text-white mb-2">Ahead of schedule</h3>
+          <p className="text-white/40 leading-relaxed text-sm">
+            Finished Math 3 as a sophomore. Now I help others do the same.
           </p>
-        </motion.div>
+        </div>
 
-      </motion.div>
-    </section >
+      </div>
+    </section>
   )
 })
 
@@ -241,6 +218,9 @@ export const BentoGrid = (props) => (
   </ErrorBoundary>
 )
 
+// ─────────────────────────────────────
+// TIMELINE — stripped of glow dots, gradient divider
+// ─────────────────────────────────────
 export const Timeline = React.memo(function Timeline() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
@@ -253,100 +233,82 @@ export const Timeline = React.memo(function Timeline() {
   }, [])
 
   return (
-    <motion.section
+    <section
       ref={ref}
       id="journey"
-      className="px-6 py-32 max-w-5xl mx-auto"
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.5 }}
+      className="px-6 py-24 max-w-4xl mx-auto"
     >
-      <div className="text-center mb-20">
-        <motion.h2 className="font-display text-4xl text-white mb-4">The Journey</motion.h2>
-        <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+      <div className="mb-16">
+        <h2 className="font-display text-4xl text-white mb-2">Where I've been</h2>
+        <p className="text-white/30 text-sm">The short version.</p>
       </div>
 
-      <div className="relative border-l border-white/10 ml-4 md:ml-0 space-y-16">
+      <div className="relative border-l border-white/[0.08] ml-4 md:ml-0 space-y-12">
         {flattened.map((node, i) => (
-          <motion.div
+          <div
             key={`${node.institution}-${node.grade}`}
-            className="relative pl-12 md:pl-16 group"
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.1 * i, duration: 0.5 }}
+            className="relative pl-10 md:pl-14"
           >
-            {/* Timeline Dot with Glow */}
-            <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-white group-hover:bg-accent transition-colors duration-500 shadow-[0_0_10px_2px_rgba(255,255,255,0.3)] group-hover:shadow-[0_0_15px_4px_rgba(99,102,241,0.5)]" />
+            <span className="absolute -left-[4px] top-2.5 w-2 h-2 rounded-full bg-white/20" />
 
-            <div className="md:grid md:grid-cols-[120px_1fr] gap-8 items-start">
-              <span className="font-mono text-sm text-white/40 pt-1 block mb-2 md:mb-0">{node.grade}</span>
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
-                <h3 className="font-display text-xl text-white mb-1 group-hover:text-accent transition-colors">{node.title}</h3>
-                <div className="text-xs font-medium text-white/50 mb-3 uppercase tracking-widest">{node.institution}</div>
-                <p className="text-white/70 leading-relaxed text-sm">{node.details}</p>
+            <div className="md:grid md:grid-cols-[100px_1fr] gap-6 items-start">
+              <span className="font-mono text-xs text-white/30 pt-1 block mb-1 md:mb-0">{node.grade}</span>
+              <div className="p-5 border border-white/[0.06] rounded-lg bg-black/10">
+                <h3 className="font-display text-lg text-white mb-1">{node.title}</h3>
+                <div className="text-[11px] text-white/30 mb-3 uppercase tracking-widest">{node.institution}</div>
+                <p className="text-white/50 leading-relaxed text-sm">{node.details}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.section>
+    </section>
   )
 })
 
+// ─────────────────────────────────────
+// SERVICES — stripped of purple blur blob, background icon ghosts, sliding CTA
+// ─────────────────────────────────────
 export const Services = React.memo(function Services() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const navigate = useNavigate()
 
   return (
-    <motion.section
+    <section
       ref={ref}
       id="services"
-      className="px-6 py-32 relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.5 }}
+      className="px-6 py-24"
     >
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-16">
+          <h2 className="font-display text-4xl text-white mb-2">What I offer</h2>
+          <p className="text-white/40 text-sm">Click any to get started.</p>
+        </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div className="text-center mb-20" {...fadeInUp}>
-          <h2 className="font-display text-4xl text-white mb-4">Services</h2>
-          <p className="text-white/60 font-body text-lg max-w-2xl mx-auto">Tutoring and mentorship built around how you learn.</p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {SERVICES_DATA.map((svc, i) => {
             const Icon = ICON_MAP[svc.iconKey] || BookOpen
             return (
-              <motion.div
+              <div
                 key={svc.id}
-                className="group p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all cursor-pointer relative overflow-hidden"
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.1 * i, duration: 0.45 }}
+                className="group p-6 border border-white/[0.06] rounded-lg bg-black/10 hover:border-white/15 transition-colors duration-200 cursor-pointer"
                 onClick={() => navigate('/contact')}
               >
-                <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
-                  <Icon className="w-32 h-32" />
-                </div>
-
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 rounded-xl bg-white/10 text-white group-hover:bg-accent group-hover:text-white transition-colors duration-300">
-                    <Icon className="w-6 h-6 stroke-[1.5]" />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 rounded-md bg-white/[0.04] text-white/50">
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent font-medium text-sm">Book This Service →</span>
                 </div>
 
-                <h3 className="font-display text-2xl text-white mb-3 relative z-10">{svc.title}</h3>
-                <p className="text-white/60 leading-relaxed mb-6 relative z-10 max-w-md">{svc.description}</p>
-              </motion.div>
+                <h3 className="font-display text-xl text-white mb-2">{svc.title}</h3>
+                <p className="text-white/40 leading-relaxed text-sm max-w-md">{svc.description}</p>
+              </div>
             )
           })}
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 })
 
@@ -354,54 +316,46 @@ export const Testimonials = React.memo(function Testimonials() {
   return null;
 })
 
+// ─────────────────────────────────────
+// FAQ — mostly clean, minor de-AI tweaks
+// ─────────────────────────────────────
 export const FAQ = React.memo(function FAQ() {
   const [openId, setOpenId] = useState(FAQ_DATA[0]?.id ?? null)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <motion.section
+    <section
       ref={ref}
       id="faq"
-      className="px-6 py-32 max-w-3xl mx-auto"
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.5 }}
+      className="px-6 py-24 max-w-2xl mx-auto"
     >
-      <motion.h2
-        className="font-display text-4xl text-white text-center mb-16"
-        {...fadeInUp}
-      >
-        Common Questions
-      </motion.h2>
-      <ul className="space-y-4">
+      <h2 className="font-display text-3xl text-white mb-12">Questions people actually ask</h2>
+      <ul className="space-y-3">
         {FAQ_DATA.map((faq, i) => (
-          <motion.li
+          <li
             key={faq.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.05 * i, duration: 0.4 }}
-            className="rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden"
+            className="border border-white/[0.06] rounded-lg overflow-hidden bg-black/10"
           >
             <button
               type="button"
               onClick={() => setOpenId((prev) => (prev === faq.id ? null : faq.id))}
-              className={`w-full text-left flex items-center justify-between gap-6 px-6 py-5 transition-colors ${openId === faq.id ? 'bg-white/5' : 'hover:bg-white/5'}`}
+              className={`w-full text-left flex items-center justify-between gap-4 px-5 py-4 transition-colors ${openId === faq.id ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'}`}
             >
-              <span className="font-display text-lg text-white/90">{faq.question}</span>
-              <ChevronDown className={`w-5 h-5 text-white/40 shrink-0 transition-transform duration-300 ${openId === faq.id ? 'rotate-180 text-white' : ''}`} />
+              <span className="font-display text-base text-white/80">{faq.question}</span>
+              <ChevronDown className={`w-4 h-4 text-white/30 shrink-0 transition-transform duration-200 ${openId === faq.id ? 'rotate-180' : ''}`} />
             </button>
             <motion.div
               initial={false}
               animate={{ height: openId === faq.id ? 'auto' : 0, opacity: openId === faq.id ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className="px-6 pb-6 pt-2 text-white/60 leading-relaxed">
+              <div className="px-5 pb-5 pt-1 text-white/45 leading-relaxed text-sm">
                 {faq.answer === 'schedule_link' ? (
                   <>
                     Use the{' '}
-                    <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline hover:no-underline">
+                    <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="text-gold underline hover:no-underline">
                       booking link
                     </a>
                     {' '}to pick a time.
@@ -411,18 +365,20 @@ export const FAQ = React.memo(function FAQ() {
                 )}
               </div>
             </motion.div>
-          </motion.li>
+          </li>
         ))}
       </ul>
-    </motion.section>
+    </section>
   )
 })
 
-// CTA removed because it's now handled by the Contact Page as per design
 export function CTA() {
   return null;
 }
 
+// ─────────────────────────────────────
+// FOOTER — honest, no tagline
+// ─────────────────────────────────────
 export const Footer = React.memo(function Footer() {
   const schema = useMemo(
     () => ({
@@ -443,65 +399,56 @@ export const Footer = React.memo(function Footer() {
   )
 
   return (
-    <footer className="px-6 pt-24 pb-12 bg-transparent text-ink/40 border-t border-white/5 mt-auto">
+    <footer className="px-6 pt-20 pb-10 text-white/30 border-t border-white/[0.06] mt-auto bg-black/10">
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-20">
-          {/* Logo Column */}
+      <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
+          {/* Logo */}
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-8">
-              <img src="/logo.png" alt="Caden Erwin" className="h-24 w-auto invert opacity-100 transition-all" />
+            <Link to="/" className="inline-block mb-6">
+              <img src="/logo.png" alt="Caden Erwin" className="h-16 w-auto invert opacity-80" />
             </Link>
           </div>
 
-          {/* Links Columns */}
+          {/* Nav */}
           <div>
-            <h4 className="font-display text-white text-sm uppercase tracking-widest mb-6">Navigation</h4>
-            <ul className="space-y-4 text-sm">
+            <h4 className="font-display text-white/60 text-xs uppercase tracking-widest mb-5">Pages</h4>
+            <ul className="space-y-3 text-sm">
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
               <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
+              <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
+          {/* Connect */}
           <div>
-            <h4 className="font-display text-white text-sm uppercase tracking-widest mb-6">Connect</h4>
-            <ul className="space-y-4 text-sm">
-              <li><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Schedule Session</a></li>
-              <li><a href={`mailto:${PROFILE.contact.email}`} className="hover:text-white transition-colors">Email Me</a></li>
+            <h4 className="font-display text-white/60 text-xs uppercase tracking-widest mb-5">Connect</h4>
+            <ul className="space-y-3 text-sm">
+              <li><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Book a session</a></li>
+              <li><a href={`mailto:${PROFILE.contact.email}`} className="hover:text-white transition-colors">Email me</a></li>
               <li><a href="https://instagram.com/thedutcher_bhs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
             </ul>
           </div>
 
+          {/* Legal */}
           <div>
-            <h4 className="font-display text-white text-sm uppercase tracking-widest mb-6">Transparency</h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link to="/transparency" className="text-white/30 hover:text-white transition-colors">Academic Records</Link></li>
-              <li><Link to="/verification-process" className="text-white/30 hover:text-white transition-colors">Verification Process</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-display text-white text-sm uppercase tracking-widest mb-6">Legal</h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link to="/terms" className="text-white/30 hover:text-white transition-colors">TOS + Privacy Policy</Link></li>
+            <h4 className="font-display text-white/60 text-xs uppercase tracking-widest mb-5">More</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/transparency" className="hover:text-white transition-colors">Transparency</Link></li>
+              <li><Link to="/verification-process" className="hover:text-white transition-colors">Verification</Link></li>
+              <li><Link to="/terms" className="hover:text-white transition-colors">Terms & Privacy</Link></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-6">
-            <span className="text-xs tracking-wider">© {new Date().getFullYear()} Caden Erwin</span>
-            <div className="flex items-center gap-4">
-              <a href="https://instagram.com/thedutcher_bhs" target="_blank" rel="noopener noreferrer">
-                <Instagram size={18} className="hover:text-white transition-colors" />
-              </a>
-            </div>
-          </div>
-          <div className="text-[10px] uppercase tracking-[0.2em] opacity-30">
-            Building the future of scholarship and leadership.
-          </div>
+        {/* Bottom */}
+        <div className="pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
+          <span className="text-xs text-white/20">© {new Date().getFullYear()} Caden Erwin</span>
+          <a href="https://instagram.com/thedutcher_bhs" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-white/40 transition-colors">
+            <Instagram size={16} />
+          </a>
         </div>
       </div>
     </footer>

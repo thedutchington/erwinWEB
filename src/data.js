@@ -1,4 +1,4 @@
-export const BOOKING_URL = 'https://calendar.app.google/Ydo96cr9naLj9qqU8'
+export const BOOKING_URL = 'https://calendar.app.google/PNLTg4EzLqb9cEQWA'
 
 export const PROFILE = {
   name: 'Caden Erwin',
@@ -37,24 +37,24 @@ export const AWARDS = [
 export const SUCCESS_FRAMEWORK = [
   {
     id: 'diagnose',
-    title: 'Diagnostic Assessment',
-    description: 'Pinpointing academic core competencies and individual growth areas to establish a precise baseline for excellence.',
+    title: 'Find the gap',
+    description: 'Figure out where you\'re actually stuck — not where you think you\'re stuck. We start with the real problem.',
     iconKey: 'Target',
-    color: '#F59E0B' // Gold
+    color: '#F59E0B'
   },
   {
     id: 'optimize',
-    title: 'Strategic Optimization',
-    description: 'Engineering tailored study methodologies and performance systems unique to the student\'s learning profile.',
+    title: 'Build a plan',
+    description: 'Everyone learns differently. I figure out what works for you specifically and we build around that.',
     iconKey: 'ShieldCheck',
-    color: '#6366F1' // Indigo
+    color: '#6366F1'
   },
   {
     id: 'mastery',
-    title: 'Iterative Mastery',
-    description: 'Applying specialized systems to neutralize weaknesses and transform them into high-performance, verifiable strengths.',
+    title: 'Repeat until it clicks',
+    description: 'Practice the hard parts until they\'re not hard anymore. No shortcuts, but it goes faster than you\'d expect.',
     iconKey: 'RefreshCw',
-    color: '#10B981' // Emerald
+    color: '#10B981'
   }
 ]
 
@@ -141,11 +141,11 @@ export const ACADEMIC_RECORDS = [
         label: "Semester 1",
         gpa: "4.0",
         courses: [
-          { name: "Integrated Math 3", grade: "A", status: "Verified" },
-          { name: "Chemistry", grade: "A", status: "Verified" },
+          { name: "Integrated Math 3", grade: "A+", status: "Verified" },
+          { name: "Chemistry", grade: "A+", status: "Verified" },
           { name: "ELA 10", grade: "A", status: "Verified" },
           { name: "World History", grade: "A", status: "Verified" },
-          { name: "ASB Leadership", grade: "A", status: "Verified" },
+          { name: "ASB Year 2", grade: "A+", status: "Verified" },
         ]
       }
     ]
@@ -175,9 +175,9 @@ export const ACADEMIC_RECORDS = [
           { name: "Law Enforcement", grade: "A", status: "Verified" },
           { name: "English 9", grade: "A", status: "Verified" },
           { name: "Pre-AP Biology", grade: "A", status: "Verified" },
-          { name: "Int. Math 2", grade: "A", status: "Verified" },
-          { name: "PE 9", grade: "A", status: "Verified" },
-          { name: "ASB Leadership", grade: "A", status: "Verified" },
+          { name: "Int. Math 2", grade: "A-", status: "Verified" },
+          { name: "PE 9", grade: "A+", status: "Verified" },
+          { name: "ASB Leadership", grade: "A+", status: "Verified" },
         ]
       }
     ]
@@ -229,13 +229,14 @@ export const ACADEMIC_RECORDS = [
         label: "Semester 2",
         gpa: "Outstanding",
         courses: [
-          { name: "Math 6", grade: "E", status: "Verified" },
-          { name: "Science 6", grade: "E", status: "Verified" },
-          { name: "ELA 6", grade: "E", status: "Verified" },
-          { name: "Social Studies 6", grade: "E", status: "Verified" },
-          { name: "Leadership", grade: "E", status: "Verified" },
+          { name: "Math 6", grade: "M", status: "Verified" },
+          { name: "Science 6", grade: "M", status: "Verified" },
+          { name: "ELA 6", grade: "M", status: "Verified" },
+          { name: "Social Studies 6", grade: "M", status: "Verified" },
+          { name: "Leadership", grade: "M", status: "Verified" },
         ]
       }
     ]
   }
 ]
+

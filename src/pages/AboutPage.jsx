@@ -18,10 +18,8 @@ export default function AboutPage() {
 
         {/* Left Side: Sticky Profile Card */}
         <aside className="lg:sticky lg:top-32 h-fit">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-glass overflow-hidden relative group"
+          <div
+            className="rounded-3xl bg-white/5 bg-black/10 backdrop-blur-xl border border-white/10 p-8 shadow-glass overflow-hidden relative group"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-50 pointer-events-none" />
 
@@ -64,7 +62,7 @@ export default function AboutPage() {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
         </aside>
 
         {/* Right Side: Scrolling Dossier */}
@@ -72,11 +70,7 @@ export default function AboutPage() {
 
           {/* Biography Section */}
           <section>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <h2 className="font-display text-sm uppercase tracking-[0.2em] text-accent mb-6">Brief</h2>
               <div className="space-y-6 text-xl md:text-2xl text-white/80 font-body leading-relaxed">
                 <p>
@@ -88,7 +82,7 @@ export default function AboutPage() {
                   I aim to lead by example, showing that academic rigor and campus involvement go hand-in-hand.
                 </p>
               </div>
-            </motion.div>
+            </div>
           </section>
 
           {/* Experience/Timeline Section */}
@@ -102,18 +96,14 @@ export default function AboutPage() {
 
                   <div className="grid grid-cols-1 gap-8">
                     {institution.roles.map((role, rIdx) => (
-                      <motion.div
+                      <div
                         key={rIdx}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: rIdx * 0.1 }}
-                        className="p-8 rounded-3xl bg-white/[0.03] border border-white/5 relative group hover:border-white/10 transition-colors"
+                        className="p-8 rounded-3xl bg-white/[0.03] bg-black/10 border border-white/5 relative group hover:border-white/10 transition-colors"
                       >
                         <span className="font-mono text-xs text-accent mb-2 block">{role.grade}</span>
                         <h4 className="font-display text-2xl text-white mb-2">{role.title}</h4>
                         <p className="text-white/50">{role.details}</p>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -128,18 +118,14 @@ export default function AboutPage() {
               {BENTO_ITEMS.map((item, idx) => {
                 const Icon = item.iconKey === 'Users' ? Users : item.iconKey === 'GraduationCap' ? GraduationCap : Award;
                 return (
-                  <motion.div
+                  <div
                     key={item.id}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/[0.08] transition-all group"
+                    className="p-8 rounded-3xl bg-white/5 bg-black/10 border border-white/10 hover:bg-white/[0.08] transition-all group"
                   >
                     <Icon className="w-10 h-10 text-white/40 mb-6 group-hover:text-accent transition-colors" />
                     <h3 className="font-display text-2xl text-white mb-3">{item.title}</h3>
                     <p className="text-white/50 leading-relaxed">{item.summary}</p>
-                  </motion.div>
+                  </div>
                 )
               })}
             </div>

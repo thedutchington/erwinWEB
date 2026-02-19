@@ -57,68 +57,57 @@ export default function TransparencyPage() {
 
                 {/* Content Area */}
                 <main className="flex-grow">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={selectedTermId}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.4 }}
-                            className="space-y-8"
-                        >
-                            {/* Header Info */}
-                            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                                <div>
-                                    <div className="text-[10px] font-mono text-gold uppercase tracking-[0.3em] mb-2">Record Dossier // {selectedGrade.grade}</div>
-                                    <h2 className="font-display text-3xl text-white">{selectedTerm.label} Academic Standing</h2>
+                    <div className="space-y-8">
+
+                        {/* Header Info */}
+                        <div className="p-8 rounded-3xl bg-white/[0.02] bg-black/10 border border-white/5 backdrop-blur-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                            <div>
+                                <div className="text-[10px] font-mono text-gold uppercase tracking-[0.3em] mb-2">Record Dossier // {selectedGrade.grade}</div>
+                                <h2 className="font-display text-3xl text-white">{selectedTerm.label} Academic Standing</h2>
+                            </div>
+                            <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+                                <div className="text-right">
+                                    <div className="text-[10px] font-mono text-white/30 uppercase">Semester GPA</div>
+                                    <div className="text-2xl font-display text-white">{selectedTerm.gpa}</div>
                                 </div>
-                                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
-                                    <div className="text-right">
-                                        <div className="text-[10px] font-mono text-white/30 uppercase">Semester GPA</div>
-                                        <div className="text-2xl font-display text-white">{selectedTerm.gpa}</div>
-                                    </div>
-                                    <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center border border-gold/40">
-                                        <ShieldCheck className="w-6 h-6 text-gold" />
-                                    </div>
+                                <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center border border-gold/40">
+                                    <ShieldCheck className="w-6 h-6 text-gold" />
                                 </div>
                             </div>
+                        </div>
 
-                            {/* Records List */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {selectedTerm.courses.map((course, idx) => (
-                                    <motion.div
-                                        key={idx}
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: idx * 0.1 }}
-                                        className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all flex justify-between items-center group"
-                                    >
-                                        <div>
-                                            <h4 className="font-display text-lg text-white mb-1">{course.name}</h4>
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-[10px] font-mono text-white/30 uppercase">Status:</span>
-                                                <span className={`text-[10px] font-mono uppercase tracking-wider ${course.status === 'Verified' ? 'text-emerald-400' : 'text-amber-400'}`}>
-                                                    {course.status}
-                                                </span>
-                                            </div>
+                        {/* Records List */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {selectedTerm.courses.map((course, idx) => (
+                                <div
+                                    key={idx}
+                                    className="p-6 rounded-2xl bg-white/[0.01] bg-black/10 border border-white/5 hover:border-white/10 transition-all flex justify-between items-center group"
+                                >
+                                    <div>
+                                        <h4 className="font-display text-lg text-white mb-1">{course.name}</h4>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-[10px] font-mono text-white/30 uppercase">Status:</span>
+                                            <span className={`text-[10px] font-mono uppercase tracking-wider ${course.status === 'Verified' ? 'text-emerald-400' : 'text-amber-400'}`}>
+                                                {course.status}
+                                            </span>
                                         </div>
-                                        <div className="text-3xl font-display text-white/50 group-hover:text-gold transition-colors">
-                                            {course.grade}
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
+                                    </div>
+                                    <div className="text-3xl font-display text-white/50 group-hover:text-gold transition-colors">
+                                        {course.grade}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
 
-                            {/* Verified Note */}
-                            <div className="p-6 rounded-2xl border border-dashed border-white/10 flex items-start gap-4 text-ink/40 hover:bg-white/[0.02] transition-colors">
-                                <Search className="w-5 h-5 flex-shrink-0 mt-1" />
-                                <p className="text-xs font-body leading-relaxed">
-                                    Semesters listed are retrieved from official Beaumont High School transcripts. Verification status indicates the record matches the final semester audit. For full details on our data integrity, view the <Link to="/verification-process" className="text-gold hover:underline font-medium">Verification Protocol</Link>.
-                                </p>
-                            </div>
+                        {/* Verified Note */}
+                        <div className="p-6 rounded-2xl border border-dashed border-white/10 bg-black/10 flex items-start gap-4 text-ink/40 hover:bg-white/[0.02] transition-colors">
+                            <Search className="w-5 h-5 flex-shrink-0 mt-1" />
+                            <p className="text-xs font-body leading-relaxed">
+                                Semesters listed are retrieved from official Beaumont High School transcripts. Verification status indicates the record matches the final semester audit. For full details on our data integrity, view the <Link to="/verification-process" className="text-gold hover:underline font-medium">Verification Protocol</Link>.
+                            </p>
+                        </div>
 
-                        </motion.div>
-                    </AnimatePresence>
+                    </div>
                 </main>
 
             </div>

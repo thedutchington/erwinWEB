@@ -9,31 +9,27 @@
     --font-display: 'Crimson Pro', serif;
     --font-body: 'Atkinson Hyperlegible', sans-serif;
 
-    --color-paper: 9 9 11;
-    /* #09090B (Deep Charcoal) */
-    --color-ink: 250 250 250;
-    /* #FAFAFA (Off-white) */
-    --color-subtle: 212 212 216;
-    /* #D4D4D8 (Zinc-300) - Better AA contrast */
-    --color-accent: 99 102 241;
-    /* #6366F1 (Indigo-500) */
+    --color-paper: 10 10 10;
+    /* #0A0A0A — true near-black, not "corporate dark" */
+    --color-ink: 235 235 230;
+    /* #EBEBE6 — warm off-white, not clinical #FAFAFA */
+    --color-subtle: 160 160 155;
+    /* warm grey, not zinc */
+    --color-accent: 56 189 248;
+    /* Sky 400 — Lighter, fresher blue */
     --color-gold: 245 158 11;
-    /* #F59E0B (Amber-500/Gold) */
+    /* Gold — unchanged */
   }
 
   body {
-    @apply bg-paper text-ink font-body antialiased;
-    cursor: none;
-  }
-
-  @media (max-width: 768px) {
-    body {
-      cursor: auto;
-    }
+    @apply bg-paper text-ink font-body;
+    -webkit-font-smoothing: auto;
+    /* disable antialiased — adds grit */
+    -moz-osx-font-smoothing: auto;
   }
 
   .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   h1,
@@ -46,8 +42,38 @@
   }
 }
 
-/* Fluid typography utilities if needed */
 .fluid-h1 {
   font-size: clamp(3rem, 5vw + 1rem, 5.5rem);
-  line-height: 1.1;
+  line-height: 1.05;
+}
+
+/* Physics-based jiggle on click — spring overshoot */
+@keyframes jiggle {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  20% {
+    transform: translate(-1px, 1px) scale(0.97);
+  }
+
+  40% {
+    transform: translate(2px, -1px) scale(1.02);
+  }
+
+  60% {
+    transform: translate(-1px, 0px) scale(0.99);
+  }
+
+  80% {
+    transform: translate(1px, 1px) scale(1.01);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.jiggle-click {
+  animation: jiggle 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
