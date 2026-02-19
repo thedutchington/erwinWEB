@@ -74,10 +74,8 @@ export default function ServicesPage() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeId}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 className="rounded-3xl bg-white/5 bg-black/10 border border-white/10 p-8 md:p-12 backdrop-blur-xl relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-12 opacity-[0.02] pointer-events-none">

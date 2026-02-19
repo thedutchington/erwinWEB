@@ -24,7 +24,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-50 pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="w-24 h-24 rounded-2xl overflow-hidden mb-6 border border-white/10 group-hover:scale-105 transition-transform duration-500 shadow-2xl">
+              <div className="w-24 h-24 rounded-2xl overflow-hidden mb-6 group-hover:scale-105 transition-transform duration-500 shadow-2xl">
                 <img
                   src="/caden-headshot.png"
                   alt="Caden Erwin"

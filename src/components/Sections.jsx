@@ -84,11 +84,11 @@ export function Hero() {
           className="flex justify-center lg:justify-end"
           style={{ y: y2 }}
         >
-          <div className="w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-lg overflow-hidden border border-white/10 grayscale-[15%] contrast-[1.05]">
+          <div className="w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 overflow-hidden grayscale-[20%] contrast-[1.05] transition-all hover:grayscale-0 duration-500">
             <img
               src="/caden-headshot.png"
               alt="Caden Erwin"
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
             />
           </div>
         </motion.div>

@@ -6,7 +6,7 @@ export const PROFILE = {
     email: 'cerwinbhs@icloud.com',
     social: '@thedutcher_bhs (Instagram)',
   },
-  tagline: 'Student. Leader. Tutor. Architect of the Future.',
+  tagline: 'Student. Leader. Tutor.',
 }
 
 export const TIMELINE_DATA = [
